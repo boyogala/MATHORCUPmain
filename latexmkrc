@@ -3,6 +3,7 @@
 # - latexmk 自动判断是否需要重跑 xelatex / bibtex，避免无脑跑 3 遍
 $pdflatex = 'xelatex -interaction=nonstopmode -file-line-error -synctex=0 %O %S';
 $bibtex   = 'bibtex %O %B';
-$pdf_mode  = 5;   # 5 = xelatex
+$pdf_mode = 5;    # 5 = xelatex
+$do_cd    = 1;    # 即使传入绝对路径，也先切到 main.tex 所在目录，保证 fonts/ 能被找到
 @default_files = ('main.tex');
 $clean_ext = 'aux log out toc bbl blg fls fdb_latexmk synctex.gz xdv run.xml';
