@@ -10,6 +10,17 @@
 
 ---
 
+## 微信公众号：博優旮旯-BOYOGALA
+
+本项目的作者有同名公众号，欢迎扫码关注作者的微信公众号：
+
+<p align="center"><img src="figures/boyogala.png" width="64%"></p>
+
+一起走进优化求解器与数值计算的科普分享.
+
+
+---
+
 ## 1. 先看这个：三步编译
 
 在项目根目录操作。根目录指同时能看到 `main.tex`、`mathorcup.cls` 和 `fonts/` 的那一层。
