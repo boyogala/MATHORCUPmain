@@ -1,0 +1,27 @@
+\section{模型建立}
+
+\subsection{目标函数设计}
+
+在示意模型中，可将总成本函数表示为运输成本与时间惩罚成本之和：
+\begin{equation}
+    \min Z = \sum_{k \in K} \sum_{i \in V} \sum_{j \in V} c_{ij} x_{ijk} + \lambda \sum_{i \in V} s_i ,
+    \label{eq:objective}
+\end{equation}
+其中，$x_{ijk}$ 表示车辆 $k$ 是否从节点 $i$ 行驶至节点 $j$，$s_i$ 表示节点 $i$ 的服务偏差量，$\lambda$ 为平衡成本与时效的权重系数。
+
+\subsection{约束条件}
+
+模型约束通常可围绕可行路径、车辆容量和时窗服务三个方面展开。写作时建议先给出约束含义，再补充公式，避免正文沦为纯符号堆积。
+
+\subsubsection{容量约束}
+
+为保证任一车辆在配送过程中不超过额定载重，可设置如下约束：
+\begin{equation}
+    \sum_{i \in V} q_i y_{ik} \le Q_k, \quad \forall k \in K ,
+    \label{eq:capacity}
+\end{equation}
+其中，$y_{ik}$ 表示节点 $i$ 是否由车辆 $k$ 服务，$Q_k$ 表示车辆 $k$ 的最大装载能力。
+
+\subsubsection{时窗约束}
+
+若客户节点存在服务时间区间，则可通过到达时刻变量限制服务行为必须落在给定窗口内。正式写作中，这一部分通常还会配合业务解释，说明提前到达、等待服务和延迟到达分别会造成怎样的实际影响。

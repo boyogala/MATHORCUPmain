@@ -1,0 +1,15 @@
+# LaTeX 编译中间产物（保留源码与 fonts/ 即可复现 PDF）
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.xdv
+*.dvi
+sections/*.aux
+# 编译产物（按需保留，本模板默认不入库）
+# main.pdf

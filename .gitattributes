@@ -1,0 +1,13 @@
+# 字体按二进制处理,禁止换行符转换(损坏字体)
+*.ttf binary
+*.otf binary
+*.pdf binary
+# 文本源码统一 LF,跨 Windows/Linux 协作不乱
+*.tex text eol=lf
+*.cls text eol=lf
+*.bib text eol=lf
+*.bst text eol=lf
+*.md text eol=lf
+latexmkrc text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf

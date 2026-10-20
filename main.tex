@@ -1,0 +1,43 @@
+% 类选项说明：draft = 草稿模式（图片不嵌入，编译更快）；noalgo = 不载入算法环境
+% 例：\documentclass[draft]{mathorcup} ；算法环境 algorithm2e 已由类在 hyperref 之前载入
+\documentclass{mathorcup}
+
+\bianhao{MCxxxxxxx}
+\tihao{A/B/C/D}
+\timu{%
+\parbox{\textwidth}{\centering
+基于多目标优化的城市配送路径规划研究}}
+
+\keyword{多目标优化;路径规划;时窗约束;配送调度}
+\bibliographystyle{thesis-guet-base-ustc}
+
+\begin{document}
+    \begin{abstract}
+\input{sections/01-abstract}
+    \end{abstract}
+
+    \tableofcontents
+    \clearpage
+    \pagenumbering{arabic}
+
+\input{sections/02-problem-statement-and-analysis}
+\input{sections/03-assumptions-and-notation}
+\input{sections/04-model-formulation}
+\input{sections/05-solution-method}
+\input{sections/06-results-analysis}
+\input{sections/07-model-validation-and-extension}
+\input{sections/08-conclusion}
+
+\phantomsection
+\addcontentsline{toc}{section}{参考文献}
+\bibliography{references}
+
+\newpage
+\appendix
+\ctexset{section={format={\zihao{-4}\heiti\raggedright}}}
+\begin{center}
+    \heiti\zihao{4} 附\hspace{1pc}录
+\end{center}
+
+本模板的附录部分可用于补充符号表、算法流程、额外实验结果或代码说明。
+\end{document}

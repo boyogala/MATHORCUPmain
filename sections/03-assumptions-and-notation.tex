@@ -1,0 +1,31 @@
+\section{模型假设与符号说明}
+
+\subsection{模型假设}
+
+为便于示意，可先给出若干常规假设：
+\begin{enumerate}
+    \item 配送车辆在规划周期内均可正常投入使用，且中途不考虑临时故障。
+    \item 每个客户节点仅服务一次，且对应需求量在规划时刻已知。
+    \item 路网通行时间可由历史数据或经验参数估计，并在当前求解周期内视为已知量。
+\end{enumerate}
+
+\subsection{主要符号}
+
+\begin{table}[H]
+    \centering
+    \caption{主要符号说明}
+    \label{tab:symbols}
+    \begin{tabular}{cc}
+        \toprule
+        符号 & 含义 \\
+        \midrule
+        $V$ & 客户节点集合 \\
+        $K$ & 配送车辆集合 \\
+        $c_{ij}$ & 节点 $i$ 到节点 $j$ 的单位运输成本 \\
+        $t_{ij}$ & 节点 $i$ 到节点 $j$ 的行驶时间 \\
+        $q_i$ & 节点 $i$ 的配送需求量 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+若正式论文中符号较多，可继续扩展为独立的长表格或附录符号表。表~\ref{tab:symbols} 在模板中主要用于展示表题、表格线和文中交叉引用的默认效果。
