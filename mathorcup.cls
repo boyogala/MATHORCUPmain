@@ -1,13 +1,20 @@
 % !TeX program = xelatex
 % !TeX encoding = UTF-8
 %
-% mathorcup.cls  v3.0
+% mathorcup.cls  v3.1
 % MathorCup 论文模板。字体自完备：英文、中文、数学、等宽全部只读 ./fonts/。
 % 禁止回退到操作系统字体或 TeX Live 自带字体（Fandol / Latin Modern / TeX Gyre / newtx）。
 % 编译器只能是 XeLaTeX，工作目录必须是本文件所在的项目根目录。
 %
+% 字体全部为可免费商用的开源字体（SIL Open Font License 1.1）：
+%   思源宋体 Source Han Serif SC  → 宋体（正文）
+%   思源黑体 Source Han Sans SC   → 黑体（标题）
+%   霞鹜文楷 LXGW WenKai          → 楷体（强调 / 斜体替代）
+%   朱雀仿宋 Zhuque Fangsong      → 仿宋（等宽）
+%   STIX Two / JetBrains Mono     → 英文与数学、等宽西文
+%
 \NeedsTeXFormat{LaTeX2e}[2020/10/01]
-\ProvidesClass{mathorcup}[2026/10/20 v3.0 MathorCup class, bundled fonts only]
+\ProvidesClass{mathorcup}[2026/10/20 v3.1 MathorCup class, bundled open-source fonts only]
 
 % ----- 引擎锁：pdfLaTeX / LuaLaTeX 无法按文件名安全嵌入这套字体 -----
 \expandafter\ifx\csname XeTeXrevision\endcsname\relax
@@ -40,7 +47,7 @@
 
 % fontspec 在 ctex 载入前锁定：
 %   no-math  不让 fontspec 改数学字体（交给 unicode-math + fonts/STIXTwoMath）
-%   quiet    永中字库没有 CJK script 标记，避免无意义警告；缺文件仍会报错
+%   quiet    压制字库 script 标记相关的提示噪音；缺文件仍会报错
 \PassOptionsToPackage{no-math,quiet}{fontspec}
 \LoadClass[oneside,a4paper,UTF8,linespread=1.25,zihao=-4,fontset=none]{ctexart}
 
@@ -82,7 +89,9 @@
     STIXTwoMath-Regular.otf,
     JetBrainsMono-Regular.ttf, JetBrainsMono-Bold.ttf,
     JetBrainsMono-Italic.ttf, JetBrainsMono-BoldItalic.ttf,
-    yzsong.ttf, yzhei.ttf, yzkai.ttf, yzfsong.ttf
+    SourceHanSerifSC-Regular.otf, SourceHanSerifSC-Bold.otf,
+    SourceHanSansSC-Regular.otf, SourceHanSansSC-Bold.otf,
+    LXGWWenKai-Regular.ttf, ZhuqueFangsong-Regular.ttf
   }
   { \MATHORCUP@needfont {#1} }
 \ExplSyntaxOff
@@ -151,31 +160,36 @@
   BoldItalicFont = JetBrainsMono-BoldItalic.ttf
 ]{JetBrainsMono-Regular.ttf}
 
-% 中文只加载一次：宋=正文，黑=无衬线/粗体，仿=等宽，楷=斜体。
+% 中文只加载一次，全部来自 fonts/ 里的开源字体：
+%   宋 = 思源宋体（正文，粗体用思源宋体 Bold）
+%   黑 = 思源黑体（标题 / 无衬线）
+%   楷 = 霞鹜文楷（\kaishu，也用作中文斜体）
+%   仿 = 朱雀仿宋（\fangsong，中文等宽）
+% 霞鹜文楷与朱雀仿宋都没有粗体字重，这两个字族的粗体回落到思源黑体 Bold。
 % 不再为 \songti 等单独 \setCJKfamilyfont 重复打开 20MB 字库。
-\setCJKmainfont{yzsong.ttf}[
+\setCJKmainfont{SourceHanSerifSC-Regular.otf}[
   Path           = \MATHORCUP@fontdir,
-  BoldFont       = yzhei.ttf,
-  ItalicFont     = yzkai.ttf,
-  BoldItalicFont = yzhei.ttf
+  BoldFont       = SourceHanSerifSC-Bold.otf,
+  ItalicFont     = LXGWWenKai-Regular.ttf,
+  BoldItalicFont = SourceHanSerifSC-Bold.otf
 ]
-\setCJKsansfont{yzhei.ttf}[
+\setCJKsansfont{SourceHanSansSC-Regular.otf}[
   Path           = \MATHORCUP@fontdir,
-  BoldFont       = yzhei.ttf,
-  ItalicFont     = yzkai.ttf,
-  BoldItalicFont = yzhei.ttf
+  BoldFont       = SourceHanSansSC-Bold.otf,
+  ItalicFont     = LXGWWenKai-Regular.ttf,
+  BoldItalicFont = SourceHanSansSC-Bold.otf
 ]
-\setCJKmonofont{yzfsong.ttf}[
+\setCJKmonofont{ZhuqueFangsong-Regular.ttf}[
   Path           = \MATHORCUP@fontdir,
-  BoldFont       = yzhei.ttf,
-  ItalicFont     = yzkai.ttf,
-  BoldItalicFont = yzhei.ttf
+  BoldFont       = SourceHanSansSC-Bold.otf,
+  ItalicFont     = LXGWWenKai-Regular.ttf,
+  BoldItalicFont = SourceHanSansSC-Bold.otf
 ]
-\setCJKfamilyfont{zhkai}{yzkai.ttf}[
+\setCJKfamilyfont{zhkai}{LXGWWenKai-Regular.ttf}[
   Path           = \MATHORCUP@fontdir,
-  BoldFont       = yzhei.ttf,
-  ItalicFont     = yzkai.ttf,
-  BoldItalicFont = yzhei.ttf
+  BoldFont       = SourceHanSansSC-Bold.otf,
+  ItalicFont     = LXGWWenKai-Regular.ttf,
+  BoldItalicFont = SourceHanSansSC-Bold.otf
 ]
 \xeCJKsetup{
   CJKmath        = true,

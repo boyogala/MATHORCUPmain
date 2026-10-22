@@ -1,8 +1,8 @@
 # MathorCup 论文模板使用说明
 
-版本：`mathorcup.cls` v3.0  
+版本：`mathorcup.cls` v3.1  
 编译器：只支持 XeLaTeX  
-字体：只使用本仓库 `fonts/`，不使用操作系统字体，也不使用 TeX Live 自带字体。
+字体：只使用本仓库 `fonts/`，不使用操作系统字体，也不使用 TeX Live 自带字体。全部为可免费商用的开源字体（SIL Open Font License 1.1）。
 
 把本仓库拷到另一台电脑后，只要安装了 TeX Live 2020 或更新版本（含 `ctex`、`fontspec`、`xeCJK`、`unicode-math`），在项目根目录执行 `latexmk` 或 `xelatex`，得到的 PDF 字形与本机一致。
 
@@ -43,13 +43,13 @@ xelatex -interaction=nonstopmode main.tex
 
 1. 终端最后一行类似 `Output written on main.pdf (7 pages).`
 2. 日志里有一行 `mathorcup: bundled fonts only from fonts/`。
-3. 用下面的命令检查，输出里只能出现 `Evermore`、`STIXTwo`、`JetBrainsMono`，不能出现 `Fandol`、`CMR`、`LatinModern`、`TeXGyre`。
+3. 用下面的命令检查，输出里只能出现 `SourceHanSerif`、`SourceHanSans`、`LXGWWenKai`、`ZhuqueFangsong`、`STIXTwo`、`JetBrainsMono`，不能出现 `Fandol`、`CMR`、`LatinModern`、`TeXGyre`。
 
 ```bash
 pdffonts main.pdf
 ```
 
-无改动时再执行 `latexmk`，大约 0.05 秒结束，并提示 `All targets (main.pdf) are up-to-date`。全量编译大约 3 秒，时间主要花在打开 `fonts/` 里约 80MB 的中文字体上。
+无改动时再执行 `latexmk`，大约 0.05 秒结束，并提示 `All targets (main.pdf) are up-to-date`。全量编译大约 3 秒，时间主要花在打开 `fonts/` 里约 110MB 的中文字体上。
 
 ---
 
@@ -72,9 +72,10 @@ MATHORCUPmain/
 │   ├── 07-model-validation-and-extension.tex
 │   └── 08-conclusion.tex
 ├── figures/                         图片只放这里
-├── fonts/                           13 个字体，缺一不可
+├── fonts/                           15 个字体 + OFL.txt，缺一不可
 ├── .gitignore                       忽略 aux/log/toc 等中间文件
 ├── .gitattributes                   字体按二进制保存，tex 用 LF
+├── LICENSE                          模板代码的 MIT 许可（字体另见 fonts/OFL.txt）
 └── README.md                        本说明
 ```
 
@@ -150,6 +151,8 @@ xelatex /path/to/MATHORCUPmain/main.tex
 
 类在排版前检查下表全部文件。缺一个就停止，不会改用 Fandol 或宋体的系统版本。
 
+英文与数学字体：
+
 | 文件名 | 谁在用 |
 |--------|--------|
 | `fonts/STIXTwoText-Regular.otf` | 英文正文、数学 `\mathrm` |
@@ -161,14 +164,32 @@ xelatex /path/to/MATHORCUPmain/main.tex
 | `fonts/JetBrainsMono-Bold.ttf` | 等宽粗体 |
 | `fonts/JetBrainsMono-Italic.ttf` | 等宽斜体 |
 | `fonts/JetBrainsMono-BoldItalic.ttf` | 等宽粗斜体 |
-| `fonts/yzsong.ttf` | 中文正文，命令 `\songti` |
-| `fonts/yzhei.ttf` | 标题和中文粗体，命令 `\heiti` |
-| `fonts/yzkai.ttf` | 命令 `\kaishu`；中文 `\textit` 也用它 |
-| `fonts/yzfsong.ttf` | 命令 `\fangsong` |
 
-仓库里没有 Helvetica、Arial、思源黑体，也没有 STIX 的 Medium / SemiBold。英文无衬线 `\textsf` 使用 STIX Two Text，这是故意的，避免去系统里搜字。
+中文字体（全部为开源免费商用字体）：
 
-中文没有单独的斜体文件。`\textit{中文}` 会变成楷体，不是缺字。`\textbf{中文}` 会变成黑体。
+| 文件名 | 字样 | 谁在用 |
+|--------|------|--------|
+| `fonts/SourceHanSerifSC-Regular.otf` | 思源宋体 | 中文正文，命令 `\songti` |
+| `fonts/SourceHanSerifSC-Bold.otf` | 思源宋体 Bold | 中文 `\textbf` |
+| `fonts/SourceHanSansSC-Regular.otf` | 思源黑体 | 标题和中文无衬线，命令 `\heiti` |
+| `fonts/SourceHanSansSC-Bold.otf` | 思源黑体 Bold | 黑体加粗、仿宋与楷体的粗体回退 |
+| `fonts/LXGWWenKai-Regular.ttf` | 霞鹜文楷 | 命令 `\kaishu`；中文 `\textit` 也用它 |
+| `fonts/ZhuqueFangsong-Regular.ttf` | 朱雀仿宋 | 命令 `\fangsong`；中文等宽 |
+
+四种中文字样的对应关系：
+
+| 命令 | 印出来的字样 | 用的字体 |
+|------|--------------|----------|
+| `\songti` | 宋体 | 思源宋体 |
+| `\heiti` | 黑体 | 思源黑体 |
+| `\kaishu` | 楷体 | 霞鹜文楷 |
+| `\fangsong` | 仿宋 | 朱雀仿宋 |
+
+仓库里没有 Helvetica、Arial，也没有 STIX 的 Medium / SemiBold。英文无衬线 `\textsf` 使用 STIX Two Text，这是故意的，避免去系统里搜字。
+
+中文没有单独的斜体文件。`\textit{中文}` 会变成楷体（霞鹜文楷），不是缺字。`\textbf{中文}` 会变成宋体加粗（思源宋体 Bold）。
+
+霞鹜文楷和朱雀仿宋只提供 Regular 一个字重，所以 `\kaishu`、`\fangsong` 里的粗体回退到思源黑体 Bold。
 
 下面这些写法会破坏自完备，不要加进 `main.tex` 或章节：
 
@@ -479,7 +500,7 @@ latexmk -C
 
 `latexmkrc` 已关闭 SyncTeX（`-synctex=0`），少写一个同步文件。若编辑器需要反向搜索，把 `latexmkrc` 里的 `-synctex=0` 改成 `-synctex=1`。
 
-不要为了提速安装系统字体，也不要删除 `yzsong.ttf` 等大文件。那 80MB 是每次编译的主要成本，也是换电脑后字形不变的原因。
+不要为了提速安装系统字体，也不要删除 `SourceHanSerifSC-Regular.otf` 等大文件。那 110MB 是每次编译的主要成本，也是换电脑后字形不变的原因。
 
 ---
 
@@ -489,7 +510,7 @@ latexmk -C
 当前按钮或命令是 pdfLaTeX / LuaLaTeX。改成 `xelatex main.tex` 或 `latexmk`。
 
 **`Missing bundled font fonts/xxx`**  
-不在项目根目录，或 `fonts/` 少了文件。执行 `ls fonts | wc -l`，结果必须是 13。然后 `cd` 到根目录重编。
+不在项目根目录，或 `fonts/` 少了文件。执行 `ls fonts | wc -l`，结果必须是 16（15 个字体 + 1 份 `OFL.txt`）。然后 `cd` 到根目录重编。
 
 **`Option fontset=windows is disabled`**  
 删掉 `fontset` 选项。类固定 `fontset=none`。
@@ -527,4 +548,17 @@ latexmk -C
 
 ## 11. 许可
 
-模板用于 MathorCup 写作。STIX Two、JetBrains Mono、永中字库的版权归原作者，使用时遵守各自许可。本说明不授予这些字体的额外权利。
+模板代码采用 MIT 许可，见仓库根目录的 `LICENSE`。仓库里所有字体的版权归原作者，使用时遵守各自许可。本说明不授予这些字体的额外权利。
+
+随附字体的完整许可文本见 `fonts/OFL.txt`，再分发 `fonts/` 时请一并保留该文件。
+
+| 字体 | 许可 | 来源 |
+|------|------|------|
+| 思源宋体 Source Han Serif SC | SIL Open Font License 1.1 | Adobe，https://github.com/adobe-fonts/source-han-serif |
+| 思源黑体 Source Han Sans SC | SIL Open Font License 1.1 | Adobe，https://github.com/adobe-fonts/source-han-sans |
+| 霞鹜文楷 LXGW WenKai | SIL Open Font License 1.1 | LXGW，https://github.com/lxgw/LxgwWenKai |
+| 朱雀仿宋 Zhuque Fangsong | SIL Open Font License 1.1 | 璇玑造字，https://github.com/TrionesType/zhuque |
+| STIX Two Text / STIX Two Math | SIL Open Font License 1.1 | https://github.com/stipub/stixfonts |
+| JetBrains Mono | SIL Open Font License 1.1 | https://github.com/JetBrains/JetBrainsMono |
+
+OFL 1.1 允许免费商用、复制、再分发和修改，但不得单独出售字体文件；修改后的版本必须同样以 OFL 公开，并且不能使用原字体保留名称（思源的保留名称是 `Source`，霞鹜文楷是 `霞鹜` / `LXGW` 等）。这些字体均来自官方公开发布的发行包，未作修改。
